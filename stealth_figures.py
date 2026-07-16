@@ -1,6 +1,5 @@
-"""Figures for the stealth-geometry note (T1-T3 of the review response). Consumes the
-geometry of stealth_geometry.py and the reproduction's g_star/g_hat; does NOT modify the
-equilibrium reproduction.
+"""Figures for the stealth-geometry note. Consumes the
+geometry of stealth_geometry.py and the reproduction's g_star/g_hat.
 
   T1  fig_stealth_time.png   -- opening, time-domain: two panels D in R vs D perp R at the
                                 SAME ||D||=Dbar, attack-free vs worst-stealthy in position and
