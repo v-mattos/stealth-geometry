@@ -14,13 +14,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RED, TEAL, GRAY, GOLD = "#be3e26", "#1b96a6", "0.45", "#dc9c2a"
 
 
-# ---------------------------------------------------------------------------
-# Task 2 -- marginal stealthy actuation (Prop. 1') and its physical impact
-# ---------------------------------------------------------------------------
-# Impact = plant response to the MARGINAL actuation dA0 = rho(D)/sqrt(n1+n3), i.e. the
-# attacker's authority BEYOND merely mimicking the disturbance (the recentering A_c just
-# reproduces D's effect and is indistinguishable from nature). This marginal reading is what
-# makes family A flat: A_c grows with c, but the adversary's NET room is the rho-margin.
 def physical_impact(A0: float, Tf: int) -> float:
     """Push a constant actuation attack A0 through the true double integrator (rest ICs,
     superposition, matching sweep_budget.py); return max |position| deviation."""
@@ -188,13 +181,6 @@ def summary_table(cfg=FIG1, n: int = 6, seed: int = 0):
             print(f"  {label:<11}{c:>10.4f}{sg.dist_to_R(D):>12.2e}{sg.rho(D):>10.2e}"
                   f"{imp:>10.4f}{slack:>12.2e}")
 
-
-# ---------------------------------------------------------------------------
-# T3 -- REAL validation: attacker best-response over the stealthy ellipsoid, injected into
-# the true plant, measured impact vs. the prediction I(D) of eq. (11).
-# ---------------------------------------------------------------------------
-# Non-tautological because the marker is a plant rollout: gamma is MEASURED from simulate(),
-# the best-response is a real argmax over the ellipsoid, and the injected attack is simulated.
 def task3_validation(cfg=FIG1, n_c: int = 21, seed: int = 0):
     d = build(cfg)
     sg = StealthGeometry.from_data(d)
@@ -256,17 +242,6 @@ def task3_validation(cfg=FIG1, n_c: int = 21, seed: int = 0):
     return dict(gamma=gamma, rel_err=rel_err, results=results)
 
 
-# ---------------------------------------------------------------------------
-# T4 -- the ONE genuinely non-tautological check: the delta_g widening (Remark 2)
-# ---------------------------------------------------------------------------
-# Base case (g~=g): the stealthy actuation half-width is h0 = rho(D)/sqrt(n1+n3). Restoring
-# the coefficient freedom (||g~-g|| <= delta_g) lets Hbar(g~-g) cancel part of the actuation
-# residual, so the attacker can push |A0-A0c| beyond h0. We MEASURE the widened half-width h1
-# by solving, over A0, the feasibility
-#     r(A0) := min_{||z|| <= delta_g} || 1_{13} A0 + D13 - [Up;Uf] z ||  <=  Dbar
-# (A_r is chosen to zero the sensor block, so only the actuation rows remain). Remark 2
-# predicts a widening of the rho-margin of order sigma_max([Up;Uf]) * delta_g ~ 8e-4. This is
-# an APPROXIMATION test, not an identity -- the error must NOT come out at 1e-16.
 def widened_halfwidth(d, sg, D):
     """Return (h0, h1): the base actuation half-width h0 = rho(D)/sqrt(n1+n3) and the widened
     one h1 obtained by admitting the coefficient freedom ||g~-g|| <= delta_g. h1 is the largest
