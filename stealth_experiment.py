@@ -110,9 +110,6 @@ def task2(cfg=FIG1, n_c: int = 21, seed: int = 0):
     return dict(results=results, flat_err=flat_err, decay_err=decay_err, rows=rows, d=d, sg=sg)
 
 
-# ---------------------------------------------------------------------------
-# Task 3 -- Prop.-1 slack for the EXISTING (8) equilibrium attack, against several true D's
-# ---------------------------------------------------------------------------
 def task3(cfg=FIG1, n_random: int = 5, seed: int = 1):
     d = build(cfg)
     sg = StealthGeometry.from_data(d)
