@@ -1,13 +1,3 @@
-"""Budget-cap sweep (slide-10 evidence): how large can a STEALTHY attack be, and what
-position impact does it cause, as a function of the disturbance bound Dbar?
-
-For each Dbar we (i) solve the nominal robust tracking (5) -> g*, (ii) solve the attacker
-best response (8) -> the worst stealthy constant actuation attack A0, and (iii) push that A0
-through the true double integrator from rest (superposition) to get the realized position
-deviation it can cause. The point: A0 (and hence the impact) is hard-capped by Dbar, so within
-the paper's stated Dbar=0.01 a stealthy attack provably cannot reach the figure's ~0.5 excursion.
-"""
-
 from __future__ import annotations
 
 import os
